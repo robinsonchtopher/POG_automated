@@ -1,5 +1,6 @@
 import socketserver
 from turtle import down
+from xmlrpc.client import Unmarshaller
 import pyautogui
 import time
 import keyboard
@@ -70,6 +71,139 @@ Action 2: wait for game to finish, wait for command in twitch chat, or wait for 
 Action 3: conclude the game
 Action 4: 
 """
+#notes already have game ready to go on the exhibition screen, have stream running
+#start this app and then tab back into the Legends Bowl game
+time.sleep(2)#delayed start to tab into the game
+
+class Robit:
+    def __init__(self, streamer):
+        self.streamer = streamer
+        self.inGame = False # not sure which of these options is better at this point
+        self.screen = 'menu' #I'm thinking options are: menu, game, end
+        self.actions = ['up','down','left','right','enter','back', 'start', 'end', 'commands']
+    def __str__(self):
+        return f"{self.streamer}"
+    #what all do I need the bot to do, option for each input up, down, right left, enter, back
+    #then have a function for end game, start game, skip game, 
+    def up(self):
+        #presses up on the keyboard
+        if self.inGame == True:#do not want to mess with things if a game is being played
+            print("the mesage below this")
+            #send message I think the game is currently still being played, type #end to end game
+        else:
+            pyautogui.press('up')
+            time.sleep(1)
+    def down(self):
+        #presses down on the keyboard
+        if self.inGame == True:#do not want to mess with things if a game is being played
+            print("the mesage below this")
+            #send message I think the game is currently still being played, type #end to end game
+        else:
+            pyautogui.press('down')
+            time.sleep(1)
+    def right(self):
+        #presses right on the keyboard
+        if self.inGame == True:#do not want to mess with things if a game is being played
+            print("the mesage below this")
+            #send message I think the game is currently still being played, type #end to end game
+        else:
+            pyautogui.press('right')
+            time.sleep(1)
+    def left(self):
+        #presses left on the keyboard
+        if self.inGame == True:#do not want to mess with things if a game is being played
+            print("the mesage below this")
+            #send message I think the game is currently still being played, type #end to end game
+        else:
+            pyautogui.press('left')
+            time.sleep(1)
+    def enter(self):
+        #presses k which is the equivielent to the A key on a controller
+        if self.inGame == True:#do not want to mess with things if a game is being played
+            print("the mesage below this")
+            #send message I think the game is currently still being played, type #end to end game
+        else:
+            pyautogui.keyDown('k')#k is the enter key for legends bowl
+            time.sleep(1)
+            pyautogui.keyUp('k')
+            time.sleep(1)
+    def back(self):
+        #presses the L key which this will move to the previous screen, this is equivilent to the B button on a controller 
+        if self.inGame == True:#do not want to mess with things if a game is being played
+            print("the mesage below this")
+            #send message I think the game is currently still being played, type #end to end game
+        else:
+            #pyautogui.press('l')# L is the key to go back in Legends Bowl
+            pyautogui.keyDown('l')
+            time.sleep(1)
+            pyautogui.keyUp('l')
+            time.sleep(1)
+
+    def start(self):
+        #from looking at the game this will enter the game and start it from the cpu vs cpu position
+        self.enter()
+        self.enter()
+        self.inGame=True
+
+    def end(self):
+        #this function will end the game from the ending screen and take you to the 
+        if self.inGame ==True:
+            self.enter()
+            self.enter()
+            self.down()
+            #self.start() #do not want to start the game instantly
+        else:
+            print("you are not in a game")
+
+    def reset(self):
+        #if you have given commands that leave you in a spot you are unsure how to get back to the games use this function to reset back to the exhibition menu
+        self.back()
+        self.back()
+        self.back()
+        self.back()
+        self.back()
+        self.back()
+        self.down()
+        self.enter()
+
+    def start(self):
+        #use this function to go to the starting screen of legends bowl(hopefully)
+        self.back()
+        self.back()
+        self.back()
+        self.back()
+        self.back()
+        self.back()
+
+
+    def skip(self):
+        if self.inGame == True:
+            print("the mesage below this")
+            #send message I think the game is currently still being played, type #end to end game
+        else:
+            self.down()
+            print("Start this game? This can be done using the start command!")
+    
+    def commands(self):
+        print ("These are the available commands " + self.commands)
+
+
+
+
+
+
+
+    
+time.sleep(5)
+goLive=Robit('jax_existz')
+print("POGFLBOT is ready to start the game!")
+
+
+
+
+
+
+
 #pogflbot
 #Password oauth:gl8h5tz6q7vs5k8l15qki2tm965hj6
 
@@ -112,8 +246,21 @@ while True:
         result = re.split(r"[:!-;,.\s]\s*", resp)
         print(result)
         print(result[1])
-        print(result[(len(result)-2)])
-        #if result[1] == 'jax_existz AND result[(len(result)-2)] in botCommands:
-            #bot.result[(len(result)-2)]
+        print(result[(len(result)-2)])#quoted out the streamer requirement for testing purposes
+        """if result[1] == goLive.streamer:
+            if result[(len(result)-2)] in goLive.actions:
+                #goLive.(result[(len(result)-2)])()
+                getattr(goLive, (result[(len(result)-2)]))()
+            else:
+                print("this is not an action I can take")
+        else:
+            print("this is not the streamer")"""
+        if result[(len(result)-2)] in goLive.actions:
+                #goLive.(result[(len(result)-2)])()
+                getattr(goLive, (result[(len(result)-2)]))()
+        else:
+                print("this is not an action I can take")
+
+            
         
 
