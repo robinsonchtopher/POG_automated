@@ -91,42 +91,47 @@ class Robit:
             print("the mesage below this")
             #send message I think the game is currently still being played, type #end to end game
         else:
-            pyautogui.press('up')
+            pyautogui.press('w')
             time.sleep(1)
-    def down(self):
-        #presses down on the keyboard
-        if self.inGame == True:#do not want to mess with things if a game is being played
-            print("the mesage below this")
-            #send message I think the game is currently still being played, type #end to end game
-        else:
-            pyautogui.press('down')
-            time.sleep(1)
-    def right(self):
-        #presses right on the keyboard
-        if self.inGame == True:#do not want to mess with things if a game is being played
-            print("the mesage below this")
-            #send message I think the game is currently still being played, type #end to end game
-        else:
-            pyautogui.press('right')
-            time.sleep(1)
+
     def left(self):
         #presses left on the keyboard
         if self.inGame == True:#do not want to mess with things if a game is being played
             print("the mesage below this")
             #send message I think the game is currently still being played, type #end to end game
         else:
-            pyautogui.press('left')
+            pyautogui.press('a')
             time.sleep(1)
+
+    def down(self):
+        #presses down on the keyboard
+        if self.inGame == True:#do not want to mess with things if a game is being played
+            print("the mesage below this")
+            #send message I think the game is currently still being played, type #end to end game
+        else:
+            pyautogui.press('s')
+            time.sleep(1)
+
+    def right(self):
+        #presses right on the keyboard
+        if self.inGame == True:#do not want to mess with things if a game is being played
+            print("the mesage below this")
+            #send message I think the game is currently still being played, type #end to end game
+        else:
+            pyautogui.press('d')
+            time.sleep(1)
+
     def enter(self):
         #presses k which is the equivielent to the A key on a controller
         if self.inGame == True:#do not want to mess with things if a game is being played
             print("the mesage below this")
             #send message I think the game is currently still being played, type #end to end game
-        else:
+        else:#k,down,k,k
             pyautogui.keyDown('k')#k is the enter key for legends bowl
             time.sleep(1)
             pyautogui.keyUp('k')
             time.sleep(1)
+
     def back(self):
         #presses the L key which this will move to the previous screen, this is equivilent to the B button on a controller 
         if self.inGame == True:#do not want to mess with things if a game is being played
@@ -148,10 +153,34 @@ class Robit:
     def end(self):
         #this function will end the game from the ending screen and take you to the 
         if self.inGame ==True:
+            self.back()
             self.enter()
             self.enter()
-            self.down()
-            #self.start() #do not want to start the game instantly
+            time.sleep(5)#give the game time to load the menu
+            #try 16 times to set game ingame to false if it never passes then keep change week
+            gamesplayed=0
+            while self.inGame == True:#this part of the function will identify if you have the option to start the game which only occurs when the A button is visible on this pixel
+                if pyautogui.pixel(1670,1041)[1] >= 150:#check if the green value is over 150 the actual value is about 180 
+                    self.inGame=False
+                else:
+                    if gamesplayed < 15:
+                        self.down()
+                        gamesplayed+=1
+                    else:
+                        self.nextweek()
+                         
+               
+
+    def checkgame(self):
+        if self.inGame == True:
+            if pyautogui.pixel(1670,1041)[1] >= 150:
+                self.inGame=False
+            else:
+                self.down()       
+            
+
+
+
         else:
             print("you are not in a game")
 
@@ -166,7 +195,7 @@ class Robit:
         self.down()
         self.enter()
 
-    def start(self):
+    def mainmenu(self):
         #use this function to go to the starting screen of legends bowl(hopefully)
         self.back()
         self.back()
@@ -178,14 +207,26 @@ class Robit:
 
     def skip(self):
         if self.inGame == True:
-            print("the mesage below this")
-            #send message I think the game is currently still being played, type #end to end game
+            self.chat("send message I think the game is currently still being played, type #end to end game")
         else:
             self.down()
-            print("Start this game? This can be done using the start command!")
+            self.chat("Start this game? This can be done using the start command!")
     
     def commands(self):
         print ("These are the available commands " + self.commands)
+    
+    def nextweek(self):
+
+        self.right()
+
+    def previousweek(self):
+
+        self.left()
+    
+    def chat(self,msg):
+        goLive.send("PRIVMSG #{} :{}".format(channel, msg))
+    
+
 
 
 
@@ -266,3 +307,7 @@ while True:
             
         
 
+#look into discord notification 
+#for exhibition post game takes you to main menu, press A to go in
+#for exhibition tournanet,  how do I see who wins? wait for twitch input to decalre the winner?
+#need to see how to chat with the bot
