@@ -248,19 +248,20 @@ while True:
         print(result)
         print(result[1])
         print(result[(len(result)-2)])#quoted out the streamer requirement for testing purposes
-        """if result[1] == goLive.streamer:
+        if result[1] == goLive.streamer:
             if result[(len(result)-2)] in goLive.actions:
                 #goLive.(result[(len(result)-2)])()
                 getattr(goLive, (result[(len(result)-2)]))()
             else:
                 print("this is not an action I can take")
         else:
-            print("this is not the streamer")"""
+            print("this is not the streamer")
+            """
         if result[(len(result)-2)] in goLive.actions:
                 #goLive.(result[(len(result)-2)])()
                 getattr(goLive, (result[(len(result)-2)]))()
         else:
-                print("this is not an action I can take")
+                print("this is not an action I can take")"""
 
             
         
