@@ -226,12 +226,13 @@ resp=sock.recv(2048).decode('utf-8')
 
 print(resp)
 #sock.close()
+"""
 logging.basicConfig(level=logging.DEBUG,#debug allows all levels of logging to be written
                     format='%(asctime)s — %(message)s',#look of the file, time recorded the line and message separated by a dash
                     datefmt='%Y-%m-%d_%H:%M:%S', #how the time portion is recorded
                     handlers=[logging.FileHandler('chat.log', encoding='utf-8')])#logging to chat.log, could add another handler to print
 #should also add a more dynamic name for better filing
-logging.info(resp)
+logging.info(resp)"""
 
 while True:
     resp = sock.recv(2048).decode('utf-8')

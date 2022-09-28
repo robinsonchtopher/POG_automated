@@ -625,3 +625,15 @@ PING :tmi.twitch.tv
 
 2022-09-27_11:47:52 — :sunpillar!sunpillar@sunpillar.tmi.twitch.tv PRIVMSG #jax_existz :end
 
+2022-09-27_21:02:29 — :tmi.twitch.tv 001 pogflbot :Welcome, GLHF!
+:tmi.twitch.tv 002 pogflbot :Your host is tmi.twitch.tv
+:tmi.twitch.tv 003 pogflbot :This server is rather new
+:tmi.twitch.tv 004 pogflbot :-
+:tmi.twitch.tv 375 pogflbot :-
+:tmi.twitch.tv 372 pogflbot :You are in a maze of twisty passages, all alike.
+:tmi.twitch.tv 376 pogflbot :>
+
+2022-09-27_21:02:29 — :pogflbot!pogflbot@pogflbot.tmi.twitch.tv JOIN #jax_existz
+:pogflbot.tmi.twitch.tv 353 pogflbot = #jax_existz :pogflbot
+:pogflbot.tmi.twitch.tv 366 pogflbot #jax_existz :End of /NAMES list
+
