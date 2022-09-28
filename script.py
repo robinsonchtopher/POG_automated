@@ -80,7 +80,7 @@ class Robit:
         self.streamer = streamer
         self.inGame = False # not sure which of these options is better at this point
         self.screen = 'menu' #I'm thinking options are: menu, game, end
-        self.actions = ['up','down','left','right','enter','back', 'start', 'end', 'commands']
+        self.actions = ['up','down','left','right','enter','back', 'start', 'end', 'commands', 'skip']
     def __str__(self):
         return f"{self.streamer}"
     #what all do I need the bot to do, option for each input up, down, right left, enter, back
@@ -304,10 +304,21 @@ while True:
         else:
                 print("this is not an action I can take")"""
 
-            
-        
+teams={}            
+def tournament():
+    #for each of the 32 teams assign a random value
+    for i in teams:
+        teams[i][2]=random(1,32)#that has not been selected
+    #identify the location of each team in the list of teams
 
-#look into discord notification 
+    #find the shortest path to selecting them or just press that many times
+    #start game, wait for end of game, can be twitch could be look for end game screen colors
+    #start next game, should finish first round games then go to second round, etc.
+    #at the end maybe do something? and output the bracket as we go so the winner can be easily seen
+
+
+
+#look into discord notification, this will not work without another account which requires cell phone verification lol
 #for exhibition post game takes you to main menu, press A to go in
 #for exhibition tournanet,  how do I see who wins? wait for twitch input to decalre the winner?
 #need to see how to chat with the bot
