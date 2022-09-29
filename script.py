@@ -125,6 +125,8 @@ class Robit:
     def start(self):
         #from looking at the game this will enter the game and start it from the cpu vs cpu position
         self.enter()
+        self.down()
+        self.enter()
         self.enter()
         self.inGame=True
 
@@ -137,30 +139,22 @@ class Robit:
             time.sleep(5)#give the game time to load the menu
             #try 16 times to set game ingame to false if it never passes then keep change week
             gamesplayed=0
-            while self.inGame == True:#this part of the function will identify if you have the option to start the game which only occurs when the A button is visible on this pixel
-                if pyautogui.pixel(1670,1041)[1] >= 150:#check if the green value is over 150 the actual value is about 180 
-                    self.inGame=False
-                else:
-                    if gamesplayed < 15:
-                        self.down()
-                        gamesplayed+=1
-                    else:
-                        self.nextweek()
+            self.findgame()
                          
                
 
-    def checkgame(self):
-        if self.inGame == True:
-            if pyautogui.pixel(1670,1041)[1] >= 150:
+    def findgame(self):
+        gamesplayed=0
+        for i in range(0,15)
+            if pyautogui.pixel(1670,1041)[1] >= 150:#check if the green value is over 150 the actual value is about 180 
                 self.inGame=False
             else:
-                self.down()       
+                if gamesplayed == 15:
+                    self.down()
+                    gamesplayed+=1
+                else:
+                    self.nextweek()       
             
-
-
-
-        else:
-            print("you are not in a game")
 
     def reset(self):
         #if you have given commands that leave you in a spot you are unsure how to get back to the games use this function to reset back to the exhibition menu
