@@ -138,20 +138,20 @@ class Robit:
             self.enter()
             time.sleep(5)#give the game time to load the menu
             #try 16 times to set game ingame to false if it never passes then keep change week
-            gamesplayed=0
             self.findgame()
                          
                
 
     def findgame(self):
+        self.gametowatch=False
         gamesplayed=0
-        for i in range(0,15):
-            print(pyautogui.pixel(1670,1041)[1])
-            print(gamesplayed)
+        while self.gamestowatch==False:
+            print(pyautogui.pixel(1670,1041)[1])#check
+            print(gamesplayed)#check
             if pyautogui.pixel(1670,1041)[1] >= 150:#check if the green value is over 150 the actual value is about 180 
-                self.inGame=False
+                self.gamestowatch=True
             else:
-                if gamesplayed <= 14:
+                if gamesplayed < 15:
                     self.down()
                     gamesplayed+=1
                 else:
