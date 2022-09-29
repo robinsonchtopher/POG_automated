@@ -80,7 +80,7 @@ class Robit:
         self.streamer = streamer
         self.inGame = False # not sure which of these options is better at this point
         self.screen = 'menu' #I'm thinking options are: menu, game, end
-        self.actions = ['up','down','left','right','enter','back', 'start', 'end', 'commands', 'skip']
+        self.actions = ['up','down','left','right','enter','back', 'start', 'end', 'commands', 'skip', 'findgame']
     def __str__(self):
         return f"{self.streamer}"
     #what all do I need the bot to do, option for each input up, down, right left, enter, back
@@ -145,7 +145,7 @@ class Robit:
 
     def findgame(self):
         gamesplayed=0
-        for i in range(0,15)
+        for i in range(0,15):
             if pyautogui.pixel(1670,1041)[1] >= 150:#check if the green value is over 150 the actual value is about 180 
                 self.inGame=False
             else:
