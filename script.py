@@ -147,10 +147,11 @@ class Robit:
         gamesplayed=0
         for i in range(0,15):
             print(pyautogui.pixel(1670,1041)[1])
+            print(gamesplayed)
             if pyautogui.pixel(1670,1041)[1] >= 150:#check if the green value is over 150 the actual value is about 180 
                 self.inGame=False
             else:
-                if gamesplayed < 15:
+                if gamesplayed <= 14:
                     self.down()
                     gamesplayed+=1
                 else:
