@@ -1,9 +1,9 @@
-import socketserver
+#import socketserver
 from turtle import down
 from xmlrpc.client import Unmarshaller
 import pyautogui
 import time
-import keyboard
+#import keyboard
 import numpy as np
 import random
 #import win32api, win32con
@@ -86,63 +86,41 @@ class Robit:
     #what all do I need the bot to do, option for each input up, down, right left, enter, back
     #then have a function for end game, start game, skip game, 
     def up(self):
-        #presses up on the keyboard
-        if self.inGame == True:#do not want to mess with things if a game is being played
-            print("the mesage below this")
-            #send message I think the game is currently still being played, type #end to end game
-        else:
             pyautogui.press('w')
             time.sleep(1)
 
     def left(self):
-        #presses left on the keyboard
-        if self.inGame == True:#do not want to mess with things if a game is being played
-            print("the mesage below this")
-            #send message I think the game is currently still being played, type #end to end game
-        else:
             pyautogui.press('a')
             time.sleep(1)
 
     def down(self):
         #presses down on the keyboard
-        if self.inGame == True:#do not want to mess with things if a game is being played
-            print("the mesage below this")
-            #send message I think the game is currently still being played, type #end to end game
-        else:
-            pyautogui.press('s')
-            time.sleep(1)
+        pyautogui.press('s')
+        time.sleep(1)
 
     def right(self):
-        #presses right on the keyboard
-        if self.inGame == True:#do not want to mess with things if a game is being played
-            print("the mesage below this")
-            #send message I think the game is currently still being played, type #end to end game
-        else:
-            pyautogui.press('d')
-            time.sleep(1)
+
+        pyautogui.press('d')
+        time.sleep(1)
 
     def enter(self):
-        #presses k which is the equivielent to the A key on a controller
-        if self.inGame == True:#do not want to mess with things if a game is being played
-            print("the mesage below this")
-            #send message I think the game is currently still being played, type #end to end game
-        else:#k,down,k,k
-            pyautogui.keyDown('k')#k is the enter key for legends bowl
-            time.sleep(1)
-            pyautogui.keyUp('k')
-            time.sleep(1)
+        pyautogui.keyDown('k')#k is the enter key for legends bowl
+        time.sleep(1)
+        pyautogui.keyUp('k')
+        time.sleep(1)
 
     def back(self):
-        #presses the L key which this will move to the previous screen, this is equivilent to the B button on a controller 
+        """#presses the L key which this will move to the previous screen, this is equivilent to the B button on a controller 
         if self.inGame == True:#do not want to mess with things if a game is being played
             print("the mesage below this")
             #send message I think the game is currently still being played, type #end to end game
         else:
             #pyautogui.press('l')# L is the key to go back in Legends Bowl
-            pyautogui.keyDown('l')
-            time.sleep(1)
-            pyautogui.keyUp('l')
-            time.sleep(1)
+            """
+        pyautogui.keyDown('l')
+        time.sleep(1)
+        pyautogui.keyUp('l')
+        time.sleep(1)
 
     def start(self):
         #from looking at the game this will enter the game and start it from the cpu vs cpu position
@@ -207,13 +185,13 @@ class Robit:
 
     def skip(self):
         if self.inGame == True:
-            self.chat("send message I think the game is currently still being played, type #end to end game")
+            print("send message I think the game is currently still being played, type #end to end game")
         else:
             self.down()
-            self.chat("Start this game? This can be done using the start command!")
+            print("Start this game? This can be done using the start command!")
     
     def commands(self):
-        print ("These are the available commands " + self.commands)
+        print("These are the available commands " + str(self.actions))
     
     def nextweek(self):
 
@@ -224,7 +202,8 @@ class Robit:
         self.left()
     
     def chat(self,msg):
-        goLive.send("PRIVMSG #{} :{}".format(channel, msg))
+        sock.send(f"PRIVMSG {msg}\n".encode('utf-8'))
+        sock.send("PRIVMSG {} :{}\n".format(channel, msg).encode('utf-8'))
     
 
 
@@ -289,7 +268,7 @@ while True:
         print(result)
         print(result[1])
         print(result[(len(result)-2)])#quoted out the streamer requirement for testing purposes
-        if result[1] == goLive.streamer:
+        """if result[1] == goLive.streamer:
             if result[(len(result)-2)] in goLive.actions:
                 #goLive.(result[(len(result)-2)])()
                 getattr(goLive, (result[(len(result)-2)]))()
@@ -302,7 +281,7 @@ while True:
                 #goLive.(result[(len(result)-2)])()
                 getattr(goLive, (result[(len(result)-2)]))()
         else:
-                print("this is not an action I can take")"""
+                print("this is not an action I can take")
 
 teams={}            
 def tournament():
