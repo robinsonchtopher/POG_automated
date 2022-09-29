@@ -86,12 +86,12 @@ class Robit:
     #what all do I need the bot to do, option for each input up, down, right left, enter, back
     #then have a function for end game, start game, skip game, 
     def up(self):
-            pyautogui.press('w')
-            time.sleep(1)
+        pyautogui.press('w')
+        time.sleep(1)
 
     def left(self):
-            pyautogui.press('a')
-            time.sleep(1)
+        pyautogui.press('a')
+        time.sleep(1)
 
     def down(self):
         #presses down on the keyboard
