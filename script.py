@@ -145,11 +145,11 @@ class Robit:
     def findgame(self):
         self.gametowatch=False
         gamesplayed=0
-        while self.gamestowatch==False:
+        while self.gametowatch==False:
             print(pyautogui.pixel(1670,1041)[1])#check
             print(gamesplayed)#check
             if pyautogui.pixel(1670,1041)[1] >= 150:#check if the green value is over 150 the actual value is about 180 
-                self.gamestowatch=True
+                self.gametowatch=True
             else:
                 if gamesplayed < 15:
                     self.down()
@@ -211,7 +211,7 @@ class Robit:
 
     
 time.sleep(5)
-goLive=Robit('jax_existz')
+goLive=Robit('jax_existz')#('sunpillar')
 print("POGFLBOT is ready to start the game!")
 
 
@@ -230,7 +230,8 @@ server = 'irc.chat.twitch.tv'
 port = 6667
 nickname = 'pogflbot'
 token = 'oauth:gl8h5tz6q7vs5k8l15qki2tm965hj6'
-channel = '#jax_existz'
+channel = '#jax_existz'#sunpillar'
+#jax_existz
 
 sock.connect((server, port))
 #encode('utf-8') encodes the string to bytes so it can be sent over the socket
@@ -264,7 +265,8 @@ while True:
         print(result)
         print(result[1])
         print(result[(len(result)-2)])#quoted out the streamer requirement for testing purposes
-        """if result[1] == goLive.streamer:
+        """
+        if result[1] == goLive.streamer:
             if result[(len(result)-2)] in goLive.actions:
                 #goLive.(result[(len(result)-2)])()
                 getattr(goLive, (result[(len(result)-2)]))()
@@ -272,7 +274,7 @@ while True:
                 print("this is not an action I can take")
         else:
             print("this is not the streamer")
-            """
+        """
         if result[(len(result)-2)] in goLive.actions:
                 #goLive.(result[(len(result)-2)])()
                 getattr(goLive, (result[(len(result)-2)]))()
